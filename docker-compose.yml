@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+       - '5432'
+  web:
+    build: .
+    command: ./entrypoint.sh
+    volumes:
+      - .:/code
+    ports:
+      - "8080:8000"
+    depends_on:
+      - db
+    links:
+      - redis
+  redis:
+    image: redis:latest
+    restart: always
+  celery:
+    build: .
+    command: ./run_celery.sh
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+      - redis

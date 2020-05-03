@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% csrf_token %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+
+  <p><a href="{% url 'logout' %}">logout</a></p>
+  <table>
+    <tr>
+    {% for key in rates.keys %}
+      <th>{{ key }}</th>
+    {% endfor %}
+    </tr>
+    <tr>
+    {% for value in rates.values %}
+      <td>{{ value }}</td>
+    {% endfor %}
+    </tr>
+  </table>
+  <table>
+    <tr>
+    {% for key in history.keys %}
+      <th>{{ key }}</th>
+    {% endfor %}
+    </tr>
+    <tr>
+    {% for values in history.values %}
+      <td>
+        {% for v in values %}
+        {{ v }}<br>
+        {% endfor %}
+      </td>
+    {% endfor %}
+    </tr>
+  </table>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}
