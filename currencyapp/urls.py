@@ -21,9 +21,9 @@ from scraper.views import signup, edit_user, home, currency_rate, historical_cur
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include('django.contrib.auth.urls')),
-    path("signup/", signup),
-    path("edit/", edit_user),
-    path("home/", home),
+    path("signup/", signup, name='signup'),
+    path("edit/", edit_user, name='edit'),
+    path("home/", home, name='home'),
     path("currency/<str:name>/", currency_rate),
     path("currency/<str:name>/history/", historical_currency_rates),
 ]

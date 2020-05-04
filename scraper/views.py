@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.http import JsonResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_exempt
 
 from scraper.forms import UserForm, SignUpForm
@@ -18,7 +18,7 @@ def edit_user(request):
         if form.is_valid():
             user = form.save(commit=False)
             user.save()
-        return render(request, 'home.html')
+        return redirect('home')
     else:
         form = UserForm(instance=user)
     return render(request, 'registration/edit.html', {'form': form})
@@ -33,7 +33,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return render(request, 'home.html')
+            return redirect('home')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})

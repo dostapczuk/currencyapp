@@ -14,7 +14,7 @@ class UserForm(forms.ModelForm):
 
     def clean_currency(self):
         currency = self.cleaned_data.get('currency').first()
-        u = UserCurrency.objects.filter(currency=currency)
+        u = UserCurrency.objects.filter(currency=currency, user=self.instance)
         if not u:
             user_currency = UserCurrency(user=self.instance, currency=currency)
             user_currency.save()

@@ -4,10 +4,12 @@
 
 {% block content %}
 {% csrf_token %}
-{% if user.is_authenticated %}
-  Hi {{ user.username }}!
 
-  <p><a href="{% url 'logout' %}">logout</a></p>
+{% if user.is_authenticated %}
+    Hi {{ user.username }}!
+  <p><a href={% url 'edit' %}>Edit profile</a></p>
+
+    <h3>Current currency rates</h3>
   <table>
     <tr>
     {% for key in rates.keys %}
@@ -20,6 +22,7 @@
     {% endfor %}
     </tr>
   </table>
+    <h3>Historical currency rates</h3>
   <table>
     <tr>
     {% for key in history.keys %}
@@ -36,6 +39,7 @@
     {% endfor %}
     </tr>
   </table>
+  <p><a href="{% url 'logout' %}">Logout</a></p>
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a>

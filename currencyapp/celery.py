@@ -12,7 +12,7 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     "fetch_exchange_values": {
-        "task": "scraper.tasks.show_hello_world",
+        "task": "scraper.tasks.fetch_exchange_values",
         "schedule": crontab(minute=15, hour=8, day_of_week='1-5')
     }
 }

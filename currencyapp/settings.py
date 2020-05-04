@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'scraper',
     'celery',
     'simple_history',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -127,9 +128,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'home/'
-LOGOUT_REDIRECT_URL = 'home/'
+LOGIN_REDIRECT_URL = '/home/'
+LOGOUT_REDIRECT_URL = '/home/'
 
 CELERY_DEFAULT_QUEUE = "default"
 CELERY_BROKER_URL = 'redis://redis:6379/0'
 CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
