@@ -24,6 +24,7 @@ urlpatterns = [
     path("signup/", signup, name='signup'),
     path("edit/", edit_user, name='edit'),
     path("home/", home, name='home'),
+    path("", home, name='index'),
     path("currency/<str:name>/", currency_rate),
     path("currency/<str:name>/history/", historical_currency_rates),
 ]
