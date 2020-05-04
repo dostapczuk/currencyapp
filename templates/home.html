@@ -8,7 +8,7 @@
 {% if user.is_authenticated %}
     Hi {{ user.username }}!
   <p><a href={% url 'edit' %}>Edit profile</a></p>
-
+    {% if rates and history %}
     <h3>Current currency rates</h3>
   <table>
     <tr>
@@ -39,6 +39,7 @@
     {% endfor %}
     </tr>
   </table>
+        {% endif %}
   <p><a href="{% url 'logout' %}">Logout</a></p>
 {% else %}
   <p>You are not logged in</p>
